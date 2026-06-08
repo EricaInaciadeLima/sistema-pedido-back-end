@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,14 +48,16 @@ public class ProdutoController {
                         produto.getNome()
                 ));
     }
-//    @PostMapping("/imagens")
-//    public ResponseEntity<ImagemProdutoEntity> upload(
-//            @PathVariable UUID produtoId,
-//            @RequestParam("file") MultipartFile[] file
-//                                                      ){
-//
-//        return ResponseEntity.
-//    }
+
+    @PostMapping("/{id}/imagens")
+    public ResponseEntity<Void> uploadImagens(
+            @PathVariable UUID id,
+            @RequestParam("files") List<MultipartFile> files
+    ) {
+        produtoService.uploadImagens(id, files);
+        return ResponseEntity.ok().build();
+    }
+
     @PatchMapping("/{produtoId}/imagens/{imagemId}/principal")
     public ResponseEntity<Void> definirPrincipal(
             @PathVariable UUID produtoId,
@@ -63,14 +66,6 @@ public class ProdutoController {
         produtoService.definirImagemPrincipal(produtoId, imagemId);
         return ResponseEntity.ok().build();
     }
-    @PatchMapping("/{id}/imagens")
-    public ResponseEntity<String> adicionarImagens(@PathVariable UUID id, @RequestBody List<ProdutoImagemIdsRequest> imagens) {
-
-        produtoService.adicionarImagens(id, imagens);
-
-        return ResponseEntity.ok("Imagens vinculadas com sucesso");
-    }
-
 
 
 

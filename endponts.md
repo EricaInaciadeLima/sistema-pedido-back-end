@@ -25,22 +25,26 @@ testes de unidade -> controller e service
 GET /categorias?page=0&size=10&sorte=name ->find all
 GET /categorias/{id} -> find by id -> sort, size, search 
 
+
+
+GET /produtos?page=0&size=10&sorte=name -> listagem de produtos
+PATCH /produtos/{id}/imagens -> Upload de imagens(devolver payload id) 
+POST /produtos -> criar produto(obs.:sem o campo de umgUrl, body dessa requisição passar id_umgUrl) implementar uma imagem ou nenhuma ao cadastrar produto
+
+Ultima implementação
+Adicionar validação de token
+GET /pedidos?page=0&size=10&sorte=name -> busca uma lista de pedidos e paginação
+GET /pedidos/{id} -> listar um pedido
+
+Será outro microserviço
+POST /carrinhos/usuarios/{id}/itens -> adicionar produto ao carrinho
+PUT /carrinhos/usuarios/{id}/itens/{produto-id} -> atualiza quantidade de produto
+
 GET /cupom -> busca uma lista de tudo e paginação find all
 GET /cupom/{id} -> buscar com filtragem find by id
 GET /cupom/{code} -> buscar com filtragem find by code
 PUT /cupom/{id}/toogle -> desativar
-POST /cupom/criar -> 
-
-GET /produtos?page=0&size=10&sorte=name -> listagem de produtos
-PATCH /produtos/{id}/imagens -> Upload de imagens(devolver payload id)
-POST /produtos -> criar produto(obs.:sem o campo de umgUrl, body dessa requisição passar id_umgUrl)
-
-
-GET /pedidos?page=0&size=10&sorte=name -> busca uma lista de pedidos e paginação
-GET /pedidos/{id} -> listar um pedido
-
-POST /carrinhos/usuarios/{id}/itens -> adicionar produto ao carrinho
-PUT /carrinhos/usuarios/{id}/itens/{produto-id} -> atualiza quantidade de produto
+POST /cupom/criar ->
 
 POST /checkout ->  converter carrinho por pedido,
 validar todos os itens dentro do estoque,
@@ -49,10 +53,21 @@ resolve o endereço de entrega,
 decrementa estoque,
 
 POST /pagamentos/processar -> processar (ENUM: CREDITO_CARD, DEBITO_CARD, PIX, BOLETO)*
-
+Será outro microserviço
 POST /auth/autenticar -> Autenticação vai retornar um jwt com a role de "admin" ou "user"*
 
 POST /cupons -> criar cupom para uma lista de usuarios, a rota é protegida pelo admin*
+
+BFF -> Framework https://nestjs.com/   kubernetes 
+Arquitetura vertical e horizontal
+
+docker file -> rodar docker
+h2 -> postgres(banco de dados produtivo ou não)
+
+Pensar em teste de performace para derrubar o sistema(circuit breaker, bulk head, retry e cache)
+
+Logs -> slf4j
+
 ------------
 
 validar Exception
