@@ -2,6 +2,7 @@ package com.poc.sistema_pedido.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -14,6 +15,9 @@ import java.net.URI;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
+
+    @Value("${app.s3.endpoint:http://localhost:4566}")
+    private String s3Endpoint;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -28,7 +32,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public S3Client s3Client() {
         return S3Client.builder()
                 .region(Region.US_EAST_1)
-                .endpointOverride(URI.create("http://localhost:4566")) // LocalStack
+                .endpointOverride(URI.create(s3Endpoint))
                 .credentialsProvider(
                         StaticCredentialsProvider.create(
                                 AwsBasicCredentials.create("test", "test")
