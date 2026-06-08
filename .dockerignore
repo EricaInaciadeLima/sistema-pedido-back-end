@@ -1,0 +1,11 @@
+target
+.git
+.gitignore
+.idea
+.mvn
+Dockerfile
+docker-compose.yaml
+README.md
+endponts.md
+imagens
+upload.sh
