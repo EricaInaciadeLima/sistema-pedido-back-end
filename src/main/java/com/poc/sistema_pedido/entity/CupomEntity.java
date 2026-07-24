@@ -10,6 +10,7 @@ import java.util.UUID;
 public class CupomEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
     @Column(unique = true)
     private String codigo;

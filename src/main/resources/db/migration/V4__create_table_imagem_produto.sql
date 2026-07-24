@@ -1,5 +1,5 @@
 CREATE TABLE tbl_imagem_produto (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    id UUID PRIMARY KEY,
 
     url_imagem VARCHAR(255),
     nome_arquivo VARCHAR(255),

@@ -1,5 +1,6 @@
 package com.poc.sistema_pedido.service;
 
+import com.poc.sistema_pedido.dto.ProdutoImagemIdsRequest;
 import com.poc.sistema_pedido.dto.ProdutoImagemRequest;
 import com.poc.sistema_pedido.dto.ProdutoRequest;
 import com.poc.sistema_pedido.entity.*;
@@ -48,7 +49,9 @@ public class ProdutoService {
     }
 
     @Transactional
-    public void uploadImagens(UUID produtoId, List<MultipartFile> files) {
+    public List<ProdutoImagemIdsRequest> uploadImagens(
+            UUID produtoId,
+            List<MultipartFile> files){
 
         ProdutoEntity produto = produtoRepository.findById(produtoId)
                 .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado"));
@@ -76,8 +79,17 @@ public class ProdutoService {
             imagens.add(imagem);
         }
 
-        imagemProdutoRepository.saveAll(imagens);
+        List<ImagemProdutoEntity> imagensSalvas =
+                imagemProdutoRepository.saveAll(imagens);
+
+        return imagensSalvas.stream()
+                .map(img -> new ProdutoImagemIdsRequest(
+                        img.getId(),
+                        img.getImagemDestaque()
+                ))
+                .toList();
     }
+
     @Transactional
     public void definirImagemPrincipal(UUID produtoId, UUID imagemId) {
 

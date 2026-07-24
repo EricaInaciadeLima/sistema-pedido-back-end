@@ -1,7 +1,5 @@
 Fluxo de implementação
 
-GET /usuarios/{id} -> Obtem usuario autenticado(obs.: refazer a tabela de cliente irá conter dados de endereço)
-POST /usuarios/criar -> criar a conta(não precisa devolver nada)OK
 
 
 manipular dado de maneira segura
@@ -21,21 +19,22 @@ controller mockmvc para simular o comportamento do spring (200 e 500)
 services precisam testar o "comportamento" de negocio
 
 testes de unidade -> controller e service
+GET /usuarios/{id} -> Obtem usuario autenticado(obs.: refazer a tabela de cliente irá conter dados de endereço)
+POST /usuarios/criar -> criar a conta(não precisa devolver nada)OK
 
 GET /categorias?page=0&size=10&sorte=name ->find all
-GET /categorias/{id} -> find by id -> sort, size, search 
-
-
+GET /categorias/{id} -> find by id -> sort, size, search
 
 GET /produtos?page=0&size=10&sorte=name -> listagem de produtos
 PATCH /produtos/{id}/imagens -> Upload de imagens(devolver payload id) 
 POST /produtos -> criar produto(obs.:sem o campo de umgUrl, body dessa requisição passar id_umgUrl) implementar uma imagem ou nenhuma ao cadastrar produto
 
-Ultima implementação
-Adicionar validação de token
+Adicionar validação de token - jwt + secutiry web
+class validar token
 GET /pedidos?page=0&size=10&sorte=name -> busca uma lista de pedidos e paginação
 GET /pedidos/{id} -> listar um pedido
 
+===============================================================================================================
 Será outro microserviço
 POST /carrinhos/usuarios/{id}/itens -> adicionar produto ao carrinho
 PUT /carrinhos/usuarios/{id}/itens/{produto-id} -> atualiza quantidade de produto

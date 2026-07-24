@@ -1,5 +1,5 @@
 CREATE TABLE tbl_cupom (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    id UUID PRIMARY KEY,
 
     codigo VARCHAR(100),
 

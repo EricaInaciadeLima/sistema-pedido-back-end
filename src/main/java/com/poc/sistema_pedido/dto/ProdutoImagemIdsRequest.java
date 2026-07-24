@@ -3,10 +3,14 @@ package com.poc.sistema_pedido.dto;
 import java.util.UUID;
 
 public class ProdutoImagemIdsRequest {
+
     private UUID id;
-    private boolean primaria = false;
+    private boolean primaria;
 
     public ProdutoImagemIdsRequest() {
+    }
+
+    public ProdutoImagemIdsRequest(UUID id, boolean primaria) {
         this.id = id;
         this.primaria = primaria;
     }

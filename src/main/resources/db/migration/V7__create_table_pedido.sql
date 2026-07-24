@@ -1,5 +1,5 @@
 CREATE TABLE tbl_pedido (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    id UUID PRIMARY KEY,
 
     momento TIMESTAMP,
     status_pedido VARCHAR(50),

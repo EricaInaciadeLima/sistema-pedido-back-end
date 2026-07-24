@@ -12,6 +12,7 @@ public class PedidoEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
     private Instant momento;

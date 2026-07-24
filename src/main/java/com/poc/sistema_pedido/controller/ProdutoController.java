@@ -49,23 +49,18 @@ public class ProdutoController {
                 ));
     }
 
-    @PostMapping("/{id}/imagens")
-    public ResponseEntity<Void> uploadImagens(
+    @PatchMapping("/{id}/imagens")
+    public ResponseEntity<List<ProdutoImagemIdsRequest>> uploadImagens(
             @PathVariable UUID id,
             @RequestParam("files") List<MultipartFile> files
     ) {
-        produtoService.uploadImagens(id, files);
-        return ResponseEntity.ok().build();
+
+        List<ProdutoImagemIdsRequest> response =
+                produtoService.uploadImagens(id, files);
+
+        return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/{produtoId}/imagens/{imagemId}/principal")
-    public ResponseEntity<Void> definirPrincipal(
-            @PathVariable UUID produtoId,
-            @PathVariable UUID imagemId) {
-
-        produtoService.definirImagemPrincipal(produtoId, imagemId);
-        return ResponseEntity.ok().build();
-    }
 
 
 
